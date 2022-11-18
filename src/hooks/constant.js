@@ -24,6 +24,7 @@ export const contract = {
   13308 : {
     // STAKE_ADDRESS: "0xd578bf8cc81a89619681c5969d99ea18a609c0c3",
     STAKE_ADDRESS: "0x92295eA5C293f7095408d128dad6dd08c8C7df22",
+    STAKE_ADDRESS2: "0x8e7CE1df0655CB83e0B82A15EB8FaE8Ddfc8065A",
     // MULTICALL_ADDRESS: "0x2cc8fe3e04d7b1edaeb42e2e73f78c4cac074116"
     MULTICALL_ADDRESS: "0x6463cdc085BCEdf7138AAAD5adc96fc268e544d0"
   }
@@ -68,6 +69,25 @@ export const CREDIT_STAKE_APY = [
   {
     apy: "50",
     time: "1440"
+  }
+]
+
+export const CREDIT_STAKE_APY2 = [
+  {
+    apy: "15",
+    time: "720"
+  },
+  {
+    apy: "17",
+    time: "1440"
+  },
+  {
+    apy: "20",
+    time: "1800"
+  },
+  {
+    apy: "50",
+    time: "3600"
   }
 ]
 

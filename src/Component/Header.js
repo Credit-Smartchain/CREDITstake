@@ -41,6 +41,9 @@ const Header = () => {
                             <LinkContainer to="/credit-stake">
                                 <Nav.Link>Credit Stake</Nav.Link>
                             </LinkContainer>
+                            <LinkContainer to="/validator">
+                                <Nav.Link>Validator</Nav.Link>
+                            </LinkContainer>
                             <LinkContainer to="/faq">
                                 <Nav.Link>Faq's</Nav.Link>
                             </LinkContainer>

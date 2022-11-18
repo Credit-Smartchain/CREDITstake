@@ -349,7 +349,7 @@ function Home() {
                         <Col xs={12} sm={12} md={8} lg={8}>
                             <div className="calc-box">
                                 <h3>$WCREDIT Calculator</h3>
-                                <p>Stake WCREDIT to earn WCREDIT rewards + upto 80% APY.</p>
+                                <p>Stake WCREDIT to earn BUSD rewards up to 50% APY.</p>
                                 <div className="add-liquidity">
                                     <div className="content">
                                         <div className="d-flex align-items-center justify-content-between">
@@ -362,7 +362,7 @@ function Home() {
                                             </div>
 
                                         </div>
-                                        <span className='text-danger'>{error}</span>
+                                        <span style={{"fontSize" : "14px"}} className='text-danger'>{error}</span>
                                     </div>
                                 </div>
                                 <div className="plus-sys">+</div>
@@ -404,7 +404,7 @@ function Home() {
                     <Row>
                         <Col sm={12} md={6} lg={4}>
                             <div className="details-box">
-                                <div className="title">WCREDIT Earned</div>
+                                <div className="title">BUSD Earned</div>
                                 <h4>{accStats.totalClaimedRewardTokenUser ? formatPrice(accStats.totalClaimedRewardTokenUser) : 0}</h4>
                             </div>
                         </Col>

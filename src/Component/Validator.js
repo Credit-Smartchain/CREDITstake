@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { Container, Row, Col, Button, Table } from "react-bootstrap";
-import { CREDIT_CHAIN_ID, CREDIT_STAKE_APY, contract } from "../hooks/constant";
+import { CREDIT_CHAIN_ID, CREDIT_STAKE_APY2, contract } from "../hooks/constant";
 import { formatPrice, getContract } from "../hooks/contractHelper";
-import { useCommonStats } from "../hooks/useCreditCommon";
-import { useAccountStats } from "../hooks/useCreditAccount";
 import { useWeb3React } from "@web3-react/core";
 import { toast } from 'react-toastify';
 import creditstakeAbi from '../json/creditstake.json';
 import { ethers } from "ethers";
 import { getWeb3 } from "../hooks/connectors";
+import { useCommonStats } from "../hooks/useValidatorCommon";
+import { useAccountStats } from "../hooks/useValidatorAccount";
 
 
 
-function CreditStake() {
+function Validator() {
     const { account, chainId, library } = useWeb3React();
     const [updater, setUpdater] = useState(new Date());
     const commonStats = useCommonStats(updater);
@@ -22,13 +22,13 @@ function CreditStake() {
     const [amount, setAmount] = useState(0);
     const [error, setError] = useState('');
     const timeElapsed = Date.now();
-    const [endtime, setEndtime] = useState(new Date(parseInt(timeElapsed) + parseInt(CREDIT_STAKE_APY[0].time * 86400 * 1000)));
+    const [endtime, setEndtime] = useState(new Date(parseInt(timeElapsed) + parseInt(CREDIT_STAKE_APY2[0].time * 86400 * 1000)));
 
 
     const handleChangeAPY = (e, index) => {
         e.preventDefault();
         setSelectedAPY(index);
-        setEndtime(new Date(parseInt(timeElapsed) + parseInt(CREDIT_STAKE_APY[index].time * 86400 * 1000)))
+        setEndtime(new Date(parseInt(timeElapsed) + parseInt(CREDIT_STAKE_APY2[index].time * 86400 * 1000)))
     }
 
     const handleChangeAmount = (e) => {
@@ -60,7 +60,7 @@ function CreditStake() {
                 if (account) {
                     if (chainId === CREDIT_CHAIN_ID) {
                         if (parseFloat(accStats.stakeTokenBalance) >= parseFloat(amount)) {
-                            let tokenStakingAddress = contract[CREDIT_CHAIN_ID].STAKE_ADDRESS;
+                            let tokenStakingAddress = contract[CREDIT_CHAIN_ID].STAKE_ADDRESS2;
                             let stakeContract = getContract(creditstakeAbi, tokenStakingAddress, library);
                             let stakeAmount = ethers.utils.parseUnits(amount.toString(), accStats.stakeTokenDecimals);
 
@@ -129,7 +129,7 @@ function CreditStake() {
 
             if (account) {
                 if (chainId === CREDIT_CHAIN_ID) {
-                    let tokenStakingAddress = contract[CREDIT_CHAIN_ID].STAKE_ADDRESS;
+                    let tokenStakingAddress = contract[CREDIT_CHAIN_ID].STAKE_ADDRESS2;
                     let stakeContract = getContract(creditstakeAbi, tokenStakingAddress, library);
 
 
@@ -190,7 +190,7 @@ function CreditStake() {
 
             if (account) {
                 if (chainId === CREDIT_CHAIN_ID) {
-                    let tokenStakingAddress = contract[CREDIT_CHAIN_ID].STAKE_ADDRESS;
+                    let tokenStakingAddress = contract[CREDIT_CHAIN_ID].STAKE_ADDRESS2;
                     let stakeContract = getContract(creditstakeAbi, tokenStakingAddress, library);
 
 
@@ -265,7 +265,7 @@ function CreditStake() {
                                         <div className="credit-stacked">{commonStats.totalStakedToken ? formatPrice(commonStats.totalStakedToken) : 0} <span>{commonStats.stakeTokenSymbol ? commonStats.stakeTokenSymbol : ' - '}</span></div>
                                     </div>
                                     <div className="all-info">
-                                        <div className="label-1">CREDIT STAKERS</div>
+                                        <div className="label-1">CREDIT VALIDATORS</div>
                                         <div className="credit-stacked">{commonStats.totalStakers ? formatPrice(commonStats.totalStakers) : 0}</div>
                                     </div>
                                 </div>
@@ -307,9 +307,9 @@ function CreditStake() {
                                 <div className="add-liquidity-2">
                                     <p>Lock tokens for</p>
                                     <div className="text-center">
-                                        {CREDIT_STAKE_APY.map((rowdata, index) => {
+                                        {CREDIT_STAKE_APY2.map((rowdata, index) => {
                                             return (
-                                                <button key={index} onClick={(e) => handleChangeAPY(e, index)} className={`btn-box ${rowdata.apy === CREDIT_STAKE_APY[selectedAPY].apy ? 'active' : ''}`}>
+                                                <button key={index} onClick={(e) => handleChangeAPY(e, index)} className={`btn-box ${rowdata.apy === CREDIT_STAKE_APY2[selectedAPY].apy ? 'active' : ''}`}>
                                                     {rowdata.time ? rowdata.time : ' - '} Days
                                                 </button>
                                             )
@@ -319,7 +319,7 @@ function CreditStake() {
                                 <div className="plus-sys">
                                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
                                 </div>
-                                <h4>Upto {CREDIT_STAKE_APY[selectedAPY].apy}% Returns on {CREDIT_STAKE_APY[selectedAPY].time} Days</h4>
+                                <h4>Upto {CREDIT_STAKE_APY2[selectedAPY].apy}% Returns on {CREDIT_STAKE_APY2[selectedAPY].time} Days</h4>
                                 <h4>locked until {endtime.toUTCString()}</h4>
                                 {account ? (
                                     <Button className="theme-btn w-100 mt-3" onClick={() => !loading ? handleStake() : null}>{loading ? 'Loading…' : 'Stake'}</Button>
@@ -419,4 +419,4 @@ function CreditStake() {
     )
 }
 
-export default CreditStake
+export default Validator
